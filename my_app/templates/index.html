@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cancer Research Charts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Select Topic and Chart Type</h2>
+        <form method="POST" action="/">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="topic">Topic</label>
+                    <select class="form-control" id="topic" name="topic">
+                        {% for topic in topics %}
+                        <option value="{{ topic }}" {% if topic == selected_topic %} selected {% endif %}>{{ topic }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="chart_type">Chart Type</label>
+                    <select class="form-control" id="chart_type" name="chart_type">
+                        {% for chart_type in chart_types %}
+                        <option value="{{ chart_type }}" {% if chart_type == selected_chart %} selected {% endif %}>{{ chart_type }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Generate Chart</button>
+        </form>
+
+        <hr>
+
+        <div>
+            <!-- Chart will be rendered here -->
+            {{ chart_html|safe }}
+        </div>
+    </div>
+</body>
+</html>
